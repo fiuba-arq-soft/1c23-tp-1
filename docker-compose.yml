@@ -21,6 +21,8 @@ services:
             - ./store/static/files:/static:ro
         links:
             - node
+        depends_on:
+            - node
 
     graphite:
         image: graphiteapp/graphite-statsd:1.1.10-4
