@@ -1,6 +1,17 @@
 version: '2'
 
 services:
+
+    node:
+        build: ./app
+        links:
+            - redis
+
+
+    redis:
+        image: redis:7
+
+            
     nginx:
         image: nginx:1.23.4
         ports:
@@ -24,7 +35,7 @@ services:
     grafana:
         image: grafana/grafana:9.2.15
         ports:
-            - "80:3000"
+            - "8095:3000"
         volumes:
             - "grafana_config:/var/lib/grafana"
 
@@ -40,7 +51,6 @@ services:
             - "/var/run:/var/run:rw"
             - "/sys:/sys:ro"
             - "/var/lib/docker/:/var/lib/docker:ro"
-
 volumes:
     grafana_config:
         driver: local
