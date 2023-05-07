@@ -1,15 +1,12 @@
-//const {nanoid } = require('nanoid');
-import {nanoid} from 'nanoid';
+import { nanoid } from "nanoid";
 
-import express from 'express';
-//const express = require('express')
+import express from "express";
 
-import axios from 'axios';
-//const axios = require('axios');
+import axios from "axios";
 
-//import { CreateClient } from 'redis';
-/* const { createClient } = require('redis');
+import { createClient } from "redis";
 
+/* 
 const rateLimit = require('express-rate-limit')
 
 const { XMLParser } = require('fast-xml-parser');
@@ -21,109 +18,64 @@ const apiLimiter = rateLimit({
     standarHeaders: true,
     legacyHeaders: false
 })
- */
+  */
 
 const app = express();
-/* const redisClient = createClient({url: 'redis://redis:6379'});
- */
-/* (async () => {
-    await redisClient.connect();
-})(); */
+const redisClient = createClient({ url: "redis://redis:6379" });
 
-/* process.on('SIGTERM',async() => {
-    try {
-        await redisClient.quit();
-    } catch(e) {
+(async () => {
+  await redisClient.connect();
+})();
 
-    }
-}); */
+process.on("SIGTERM", async () => {
+  try {
+    await redisClient.quit();
+  } catch (e) {}
+});
 
 const id = nanoid();
 
 app.use((req, res, next) => {
-    res.setHeader('X-API-Id', id);
-    next();
-})
-
-    //console.log("entre");
-
-app.get('/', async (req,res) => {
-    res.status(200).send("ping");
+  res.setHeader("X-API-Id", id);
+  next();
 });
 
+app.get("/", async (req, res) => {
+  res.status(200).send("ping");
+});
 
-/* app.get('/space_news', apiLimiter, async (req,res) => {
-    let titles;
+async function getFacts() {
+  const factString = await redisClient.get("fact");
+  if (factString !== NULL) {
+    return {res: JSON.parse(factString), status:200, errorMessage:""};
+  } else {
     try {
-    const titlesString = await redisClient.get('space_news');
-    
-    if (titlesString != NULL){
-        titles = JSON.parse(titlesString);
-    } else {
-        
-        const response = await axios.get('https://api.spaceflightnewsapi.net/v3/articles?_limit=5')
-        titles = [];
+      const factRes = await axios.get(
+        "https://uselessfacts.jsph.pl/api/v2/facts/random?language=en"
+      );
+      redisClient.set("fact", JSON.stringify(factRes.text), { EX: 15 });
+      return { res: fact, status: 200, errorMessage:"" };
 
-        response.data.forEach(element => {
-            if (element.hasOwnProperty('title')){
-                titles.push(element.title);
-            }
-            
-        });
-
-        await redisClient.set('space_news',JSON.stringify(titles),{EX:5}
-        );
+    } catch (error) {
+      return {
+        res: null,
+        status: error.status,
+        errorMessage: error.message,
+      };
     }
-    } catch(e) {
+  }
+}
 
-    }
-    res.status(200).send(titles);
-});
- */
+app.get("/fact", apiLimiter, async (req, res) => {
 
-app.get('/space_news', async (req,res) => {
- 
-    const response = await axios.get('https://api.spaceflightnewsapi.net/v3/articles?_limit=5')
-    let titles = [];
+  const factString = await getFacts();
 
-    response.data.forEach(element => {
-        if (element.hasOwnProperty('title')){
-            titles.push(element.title);
-        }
-        
-    });
+  let response = factString.status !== 200 ? factString.errorMessage : factString.res
 
-    //await redisClient.set('space_news',JSON.stringify(titles),{EX:5}
-    res.status(200).send(titles);
+  res.status(factString.status).send(response);
 });
 
 /*
-app.get('/fact', apiLimiter, async (req, res) => {
-
-    let fact;
-    try{
-        const factString = await redisClient.get('fact');
-        
-        if (factString !== NULL){
-            fact = JSON.parse(factString);
-        } else {
-            const fact = await axios.get('https://uselessfacts.jsph.pl/api/v2/facts/random?language=en');
-
-            await redisClient.set('fact',JSON.stringify(fact),{EX:5}
-            );
-        }
-    } catch(e) {
-
-    }
-    res.status(200).send(fact);
-  });
-
-
-app.get('/ping', (req, res) => {
-    res.status(200).send("pong");
-});
-
-
 app.get('/metar', apiLimiter, async (req,res) => {
 
     let station = req.query.station;
