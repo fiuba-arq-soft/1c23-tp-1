@@ -7,10 +7,8 @@ services:
         links:
             - redis
 
-
     redis:
         image: redis:7
-
             
     nginx:
         image: nginx:1.23.4

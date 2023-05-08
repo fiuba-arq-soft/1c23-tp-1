@@ -1,7 +1,6 @@
-FROM node:14
+FROM node:17
 RUN mkdir /opt/app
 WORKDIR /opt/app
 COPY app.js package.json package-lock.json ./
 RUN npm install 
-RUN npm install express-rate-limit
 ENTRYPOINT [ "node", "app.js" ]
