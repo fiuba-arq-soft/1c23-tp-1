@@ -141,4 +141,20 @@ app.get("/metar", async (req, res) => {
   res.status(response.status).send(message);
 });
 
+app.get('/space_news', async (req,res) => {
+
+    const response = await axios.get('https://api.spaceflightnewsapi.net/v3/articles?_limit=5')
+    let titles = [];
+
+    response.data.forEach(element => {
+        if (element.hasOwnProperty('title')){
+            titles.push(element.title);
+        }
+
+    });
+
+    //await redisClient.set('space_news',JSON.stringify(titles),{EX:5}
+    res.status(200).send(titles);
+});
+
 app.listen(3000);
