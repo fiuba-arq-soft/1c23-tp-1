@@ -7,7 +7,7 @@ import { decode } from "metar-decoder";
 import { StatsD } from "hot-shots";
 import rateLimit from "express-rate-limit";
 
-const apiLimiter = rateLimit({
+const api_limiter = rateLimit({
     windowMs: 20*60*1000, //20 minutos
     max: 100,
     standarHeaders: true,
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 });
 
 
-app.get("/ping", apiLimiter, async (req, res) => {
+app.get("/ping", api_limiter, async (req, res) => {
   res.status(200).send("Todo ok");
 });
 
@@ -56,7 +56,7 @@ async function getFact() {
   let fact_string = await redisClient.get("fact");
 
   if (fact_string !== null) {
-    return JSON.parse(fact_string);
+    return { res: JSON.parse(fact_string), status: 200, error_message: "" };
   } else {
     try {
       let start_api_fact = start_time.getTime()
@@ -71,14 +71,14 @@ async function getFact() {
       redisClient.set("fact", JSON.stringify(fact), { EX: 60 }).then(() => {
         console.log(`Cached fact id: ${facts_info.id}`);
       });
-      return { res: fact, status: 200, errorMessage: "" };
+      return { res: fact, status: 200, error_message: "" };
     } catch (err) {
-      return { res: null, status: err.status, errorMessage: err.message };
+      return { res: null, status: err.status, error_message: err.message };
     }
   }
 }
 
-app.get("/fact", apiLimiter, async (req, res) => {
+app.get("/fact", api_limiter, async (req, res) => {
 
 
   let start = start_time.getTime();
@@ -88,13 +88,13 @@ app.get("/fact", apiLimiter, async (req, res) => {
   let message =
     response_fact.status == 200
       ? response_fact.res
-      : response_fact.errorMessage;
+      : response_fact.error_message;
 
 
   let end = start_time.getTime();
-  let timeFact = start - end;
+  let time_fact = start - end;
   
-  statsd_client.timing('app.endpoint.fact', timeFact);
+  statsd_client.timing('app.endpoint.fact', time_fact);
   
   
   res.status(response_fact.status).send(message);
@@ -113,7 +113,7 @@ async function getMetarData(req) {
   let metar_key = `metar_${code_station ?? "no_param"}_key`;
   let metar_string = await redisClient.get(metar_key);
   if (metar_string !== null) {
-    return { res: JSON.parse(metar_string), status: 200, errorMessage: "" };
+    return { res: JSON.parse(metar_string), status: 200, error_message: "" };
   } else {
     const parser = new XMLParser();
     try {
@@ -142,45 +142,48 @@ async function getMetarData(req) {
         return {
           res: response_message,
           status: 200,
-          errorMessage: "",
+          error_message: "",
         };
       } else {
         return {
           res: null,
           status: 404,
-          errorMessage: `Metar no encontro información sobre la estación: ${code_station}`,
+          error_message: `Metar no encontro información sobre la estación: ${code_station}`,
         };
       }
     } catch (err) {
-      return { res: null, status: err.status, errorMessage: err.message };
+      return { res: null, status: err.status, error_message: err.message };
     }
   }
 }
 
-app.get("/metar", apiLimiter, async (req, res) => {
+app.get("/metar", api_limiter, async (req, res) => {
 
   let start = start_time.getTime();
 
   let response = await getMetarData(req);
   console.info(response);
-  let message = response.status == 200 ? response.res : response.errorMessage;
+  let message = response.status == 200 ? response.res : response.error_message;
   let end = start_time.getTime();
-  let endpoint_timeMetar_response = start - end;
+  let endpoint_time_metar_response = start - end;
 
 
-  statsd_client.timing("app.endpoint.metar.timing", endpoint_timeMetar_response);
+  statsd_client.timing(
+    "app.endpoint.metar.timing",
+    endpoint_time_metar_response
+  );
   res.status(response.status).send(message);
 });
 
 /**
  * Get or set the titles of 5 articles
- * @returns {res: [], status: requestStatusCode, errorMessage: ""}
+ * @returns {res: [], status: requestStatusCode, error_message: ""}
  */
 async function getSpaceNews(){
 
   let spaces_news = redisClient.get("space_news");
   if (!spaces_news) {
-    return { res: JSON.parse(spaces_news), status: 200, errorMessage: "" };
+    return { res: JSON.parse(spaces_news), status: 200, error_message: "" };
   }
   try {
     let start_api_space_news = start_time.getTime()
@@ -196,20 +199,20 @@ async function getSpaceNews(){
     });
 
     redisClient.set('space_news',JSON.stringify(titles),{EX:5}) 
-    return {res: titles, status: 200, errorMessage: ""};
+    return {res: titles, status: 200, error_message: ""};
   } catch (error) {
-    return {res: null, status: error.status, errorMessage: error.message};
+    return {res: null, status: error.status, error_message: error.message};
   }
   
 }
 
-app.get('/space_news', apiLimiter, async (req,res) => {
+app.get('/space_news', api_limiter, async (req,res) => {
 
   let start = start_time.getTime();
   let response = getSpaceNews();
   let end = start_time.getTime();
   let endpoint_time_space_news = start - end;
-  let message = response.res ?? res.errorMessage;
+  let message = response.res ?? res.error_message;
   statsd_client.timing("app.endpoint.space_news.timing", endpoint_time_space_news);
   req.status(response.status).send(message);
   
