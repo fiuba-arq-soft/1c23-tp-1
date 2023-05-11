@@ -66,13 +66,21 @@ Como especificamos anteriormente, es un simple healthcheck por lo que se espera 
 
 ![](files/spaceNews/api_vs_endpoint.jpg)
 
+En este primer grafico se puede observar la notoria diferencia de tiempo entre que se llama a la api a comparacion de cuando se llama al endpoint. Como primer punto a destacar es que nos afirma que por mas que parezca o suenen similares, en realidad tienen un significado muy distinto.
+
+Cuando el llamado al endpoint es mucho mayor al de la api, como en este caso, nos puede dar algunos indicios.
+
+- Primero es que puede tener un problema de escalabilidad, ya que el endpoint esta siendo utilizado simultaneamente por muchos usuarios y no puede optimizarse ante tantos request, aumentando su tiempo de respuesta.
+
+- Problemas de hardware: si el servidor que maneja el endpoint tiene recursos muy limitados, puede aumentar el tiempo de respuesta. Esto se puede ver reflejado al momento de usar el api limiter, ya que en este caso, aunque se puso un valor a prueba, se deberia ver reflejado es la capacidad que tenga la maquina que tiene el endpoint.
+
 ### Metricas del server
 
-![](files/spaceNews/client_server_metrics.jpeg)
+![](files/spaceNews/metricas.png)
 
 ## Fact
 
-![](files/fact/fact_cached_vs_no_cached.jpeg)
+![](files/fact/metrics_cached_no_cached.png)
 
 ![](files/fact/metricas_api_vs_endpoint.jpeg)
 
