@@ -98,7 +98,7 @@ app.get("/fact", async (req, res) => {
 async function getMetarData(req) {
   let response_message;
   const code_station = req.query.station;
-  let metar_key = `metar_${code_station ?? "no_param"}_key`;
+  let metar_key = `metar_${code_station ?? "null"}_key`;
   let metar_string = await redisClient.get(metar_key);
   if (metar_string !== null) {
     return { res: JSON.parse(metar_string), status: 200, error_message: "" };
@@ -122,7 +122,7 @@ async function getMetarData(req) {
         } else {
           response_message = metar_info.map((info) => decode(info.raw_text));
         }
-        redisClient
+        await redisClient
           .set(metar_key, JSON.stringify(response_message), { EX: 5 })
           .then(() => {
             console.log(`Station ${code_station} cached`);

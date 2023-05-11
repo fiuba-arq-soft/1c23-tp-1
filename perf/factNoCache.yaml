@@ -1,7 +1,7 @@
 config:
   environments:
     api:
-      target: "http://localhost:5555/api"
+      target: 'http://localhost:5555/api'
       plugins:
         statsd:
           host: localhost
@@ -18,21 +18,10 @@ config:
     - name: Plain
       duration: 60
       arrivalRate: 5
-
-  variables:
-    station:
-      - "ABCD"
-      - "SBJH"
-      - "KMIA"
-      - "SAEZ"
-      - "KJFK"
-      - "KSFO"
-      - "KORD"
+    
 
 scenarios:
-  - name: Metar (/metar)
+  - name: Fact no cache (/fact_no_cache)
     flow:
       - get:
-          url: "/metar"
-          qs:
-            station: "{{station}}"
+          url: '/fact_no_cache'

@@ -3,627 +3,77 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1616712956688,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Graphite",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 7,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "height": "250px",
-      "hiddenSeries": false,
-      "id": 4,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "hideEmpty": true,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.3.10",
-      "pointradius": 5,
-      "points": true,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "refCount": 0,
-          "refId": "B",
-          "target": "aliasByMetric(stats.gauges.$server.scenarioCounts.*)",
-          "textEditor": false
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Scenarios launched (stacked)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "rps",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Completed": "#7EB26D",
-        "Errored": "#BF1B00",
-        "Errors count": "#BF1B00",
-        "Pending": "#447EBC",
-        "Requests completed": "#7EB26D",
-        "Limited": "#FDDA0D"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Graphite",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 7,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 7
-      },
-      "height": "250",
-      "hiddenSeries": false,
-      "id": 5,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "hideEmpty": false,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.3.10",
-      "pointradius": 5,
-      "points": true,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "refId": "B",
-          "target": "alias(sumSeries(stats.gauges.$server.errors.*), 'Errored')",
-          "textEditor": true
-        },
-        {
-          "refId": "A",
-          "target": "alias(stats.gauges.$server.codes.200, 'Completed')"
-        },
-        {
-          "refId": "C",
-          "target": "alias(stats.gauges.$server.pendingRequests, 'Pending')"
-        },
-        {
-          "refId": "D",
-          "target": "alias(stats.gauges.$server.codes.429, 'Limited')"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Requests state (stacked)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Graphite",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 14
-      },
-      "height": "250px",
-      "hiddenSeries": false,
-      "id": 3,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "hideEmpty": true,
-        "hideZero": false,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.3.10",
-      "pointradius": 5,
-      "points": true,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "refCount": 0,
-          "refId": "C",
-          "target": "alias(stats.gauges.$server.scenarioDuration.max, 'Upper')"
-        },
-        {
-          "refCount": 0,
-          "refId": "B",
-          "target": "alias(stats.gauges.$server.scenarioDuration.median, 'Median')"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Response time (client-side)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ms",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Memory": "#EAB839"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Graphite",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 21
-      },
-      "height": "250px",
-      "hiddenSeries": false,
-      "hideTimeOverride": false,
-      "id": 1,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "hideEmpty": true,
-        "hideZero": false,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 250,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.3.10",
-      "pointradius": 5,
-      "points": true,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "asPercent(stats.gauges.cadvisor.1c23-tp-1_node_1.memory_usage, 1952000000)",
-          "yaxis": 1
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "hide": false,
-          "refCount": 0,
-          "refId": "C",
-          "target": "alias(removeBelowValue(asPercent(derivative(keepLastValue(stats.gauges.cadvisor.$container.cpu_cumulative_usage, 100)), 10000000000), 0.0001), 'CPU')",
-          "textEditor": false
-        },
-        {
-          "hide": false,
-          "refCount": 0,
-          "refId": "B",
-          "target": "alias(asPercent(stats.gauges.cadvisor.$container.memory_working_set, 17179869184), 'Memory')"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Resources",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "Bps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "id": 14,
-      "gridPos": {
-        "x": 0,
-        "y": 0,
-        "w": 24,
-        "h": 8
-      },
-      "type": "timeseries",
-      "title": "Relación entre el tiempo de respuesta del endpoint y la api - metar",
       "datasource": {
-        "uid": "hLgr4MU4z",
-        "type": "graphite"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "datasource": {
-            "type": "graphite",
-            "uid": "hLgr4MU4z"
-          },
-          "target": "alias(sumSeries(stats.timers.app.endpoint.metar.timing.*), \"endpoint\")",
-          "textEditor": true,
-          "refCount": 0
-        },
-        {
-          "datasource": {
-            "uid": "hLgr4MU4z",
-            "type": "graphite"
-          },
-          "refId": "B",
-          "hide": false,
-          "target": "alias(sumSeries(stats.timers.api.metar.timing.*), \"api\")",
-          "textEditor": true,
-          "refCount": 0
-        }
-      ],
-      "options": {
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        },
-        "legend": {
-          "showLegend": true,
-          "displayMode": "table",
-          "placement": "right",
-          "calcs": ["mean", "variance", "sum"]
-        }
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
             "drawStyle": "line",
+            "fillOpacity": 14,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
             "lineInterpolation": "smooth",
-            "barAlignment": 0,
             "lineWidth": 1,
-            "fillOpacity": 8,
-            "gradientMode": "opacity",
-            "spanNulls": false,
-            "showPoints": "auto",
             "pointSize": 5,
-            "stacking": {
-              "mode": "none",
-              "group": "A"
-            },
-            "axisPlacement": "auto",
-            "axisLabel": "",
-            "axisColorMode": "text",
             "scaleDistribution": {
               "type": "linear"
             },
-            "axisCenteredZero": false,
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "color": {
-            "mode": "palette-classic"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "value": null,
-                "color": "green"
-              },
-              {
-                "value": 80,
-                "color": "red"
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": []
-      }
-    },
-    {
-      "id": 13,
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "type": "timeseries",
-      "title": "Relación entre el tiempo de respuesta del endpoint y la api - space news",
-      "datasource": {
-        "uid": "hLgr4MU4z",
-        "type": "graphite"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "barAlignment": 0,
-            "lineWidth": 1,
-            "fillOpacity": 19,
-            "gradientMode": "opacity",
-            "spanNulls": false,
             "showPoints": "auto",
-            "pointSize": 4,
+            "spanNulls": false,
             "stacking": {
-              "mode": "none",
-              "group": "A"
-            },
-            "axisPlacement": "auto",
-            "axisLabel": "",
-            "axisColorMode": "text",
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "axisCenteredZero": false,
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
+              "group": "A",
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
-            },
-            "lineStyle": {
-              "fill": "solid"
             }
-          },
-          "color": {
-            "mode": "palette-classic"
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -635,16 +85,151 @@
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 14,
       "options": {
+        "legend": {
+          "calcs": ["mean", "variance", "sum"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
         "tooltip": {
           "mode": "single",
           "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(sumSeries(stats.timers.app.endpoint.metar.timing.*), \"endpoint\")",
+          "textEditor": true
         },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(sumSeries(stats.timers.api.metar.timing.*), \"api\")",
+          "textEditor": true
+        }
+      ],
+      "title": "Tiempo de respuesta de la API (/www.aviationweather.gov) vs Endpoint de /metar",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 19,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": ["api"],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 13,
+      "options": {
         "legend": {
-          "showLegend": true,
+          "calcs": ["mean", "variance", "sum"],
           "displayMode": "table",
           "placement": "right",
-          "calcs": ["mean", "variance", "sum"]
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
@@ -669,290 +254,60 @@
           "target": "alias(sumSeries(stats.timers.api.space_news.timing.*), \"api\")",
           "textEditor": true
         }
-      ]
+      ],
+      "title": "Tiempo de respuesta de la API (/api.spaceflightnewsapi.net) vs Endpoint de /space_news",
+      "type": "timeseries"
     },
     {
-      "id": 11,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "type": "timeseries",
-      "title": "Relación entre el tiempo de respuesta del endpoint y la api - fact",
       "datasource": {
         "type": "graphite",
         "uid": "hLgr4MU4z"
       },
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "smooth",
-            "barAlignment": 0,
-            "lineWidth": 1,
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "spanNulls": false,
-            "showPoints": "auto",
-            "pointSize": 5,
-            "stacking": {
-              "mode": "none",
-              "group": "A"
-            },
-            "axisPlacement": "left",
-            "axisLabel": "",
-            "axisColorMode": "series",
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "axisCenteredZero": false,
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            },
-            "lineStyle": {
-              "fill": "solid"
-            }
-          },
           "color": {
             "mode": "palette-classic"
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": []
-      },
-      "options": {
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        },
-        "legend": {
-          "showLegend": true,
-          "displayMode": "table",
-          "placement": "right",
-          "calcs": ["max", "mean", "variance"]
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "graphite",
-            "uid": "hLgr4MU4z"
-          },
-          "refCount": 0,
-          "refId": "A",
-          "target": "alias(color(sumSeries(stats.timers.app.endpoint.fact.timing.*), \"red\"), \"endpoint\")",
-          "textEditor": true
-        },
-        {
-          "datasource": {
-            "type": "graphite",
-            "uid": "hLgr4MU4z"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "B",
-          "target": "alias(color(sumSeries(stats.timers.api.fact.timing.*), \"blue\"), \"api\")",
-          "textEditor": true
-        }
-      ]
-    },
-    {
-      "id": 9,
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 7
-      },
-      "type": "timeseries",
-      "title": "Tiempo de respuesta - endpoints",
-      "datasource": {
-        "uid": "hLgr4MU4z",
-        "type": "graphite"
-      },
-      "description": "Tiempo de respuesta de los endpoints /fact /space_news y /metar",
-      "fieldConfig": {
-        "defaults": {
           "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "smooth",
-            "barAlignment": -1,
-            "lineWidth": 1,
-            "fillOpacity": 14,
-            "gradientMode": "opacity",
-            "spanNulls": false,
-            "showPoints": "auto",
-            "pointSize": 5,
-            "stacking": {
-              "mode": "none",
-              "group": "A"
-            },
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
             "axisPlacement": "auto",
-            "axisLabel": "",
-            "axisColorMode": "series",
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "axisCenteredZero": false,
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "color": {
-            "mode": "palette-classic"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": []
-      },
-      "options": {
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        },
-        "legend": {
-          "showLegend": true,
-          "displayMode": "table",
-          "placement": "right",
-          "calcs": ["mean", "min", "max", "sum"]
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "graphite",
-            "uid": "hLgr4MU4z"
-          },
-          "refCount": 0,
-          "refId": "A",
-          "target": "alias(color(sumSeries(stats.timers.app.endpoint.fact.timing.*), \"red\"), \"fact\")",
-          "textEditor": true
-        },
-        {
-          "datasource": {
-            "type": "graphite",
-            "uid": "hLgr4MU4z"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "B",
-          "target": "alias(color(sumSeries(stats.timers.app.endpoint.space_news.timing.*), \"red\"), \"space-news\")",
-          "textEditor": true
-        },
-        {
-          "datasource": {
-            "type": "graphite",
-            "uid": "hLgr4MU4z"
-          },
-          "hide": false,
-          "refCount": 0,
-          "refId": "C",
-          "target": "alias(color(sumSeries(stats.timers.app.endpoint.metar.timing.*), \"red\"), \"metar\")",
-          "textEditor": true
-        }
-      ]
-    },
-    {
-      "id": 7,
-      "gridPos": {
-        "h": 24,
-        "w": 24,
-        "x": 0,
-        "y": 15
-      },
-      "type": "timeseries",
-      "title": "Tiempo de respuesta APIS",
-      "datasource": {
-        "uid": "hLgr4MU4z",
-        "type": "graphite"
-      },
-      "description": "Tiempo de respuesta de las apis de /uselessfacts, /api.spaceflightnewsapi.net y /www.aviationweather.gov\n",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "smooth",
+            "axisWidth": 50,
             "barAlignment": 0,
-            "lineWidth": 1,
+            "drawStyle": "line",
             "fillOpacity": 25,
             "gradientMode": "hue",
-            "spanNulls": false,
-            "showPoints": "auto",
-            "pointSize": 5,
-            "stacking": {
-              "mode": "none",
-              "group": "A"
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "axisPlacement": "auto",
-            "axisLabel": "",
-            "axisColorMode": "series",
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "axisCenteredZero": false,
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
-            },
-            "axisWidth": 50,
-            "lineStyle": {
-              "fill": "solid"
             }
-          },
-          "color": {
-            "mode": "palette-classic"
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -964,16 +319,23 @@
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 15,
       "options": {
+        "legend": {
+          "calcs": ["mean", "max", "sum"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
         "tooltip": {
           "mode": "single",
           "sort": "none"
-        },
-        "legend": {
-          "showLegend": true,
-          "displayMode": "table",
-          "placement": "right",
-          "calcs": ["mean", "max", "sum"]
         }
       },
       "targets": [
@@ -1009,26 +371,778 @@
           "target": "alias(color(sumSeries(stats.timers.api.metar.timing.*), \"green\"), \"metar\")",
           "textEditor": true
         }
-      ]
+      ],
+      "title": "Tiempo de respuesta de las APIs utilizadas por los endpoints /fact, /space_news y /metar",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "left",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 14,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": ["max", "mean", "variance"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.fact.timing.*), \"red\"), \"endpoint\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(color(sumSeries(stats.timers.api.fact.timing.*), \"blue\"), \"api\")",
+          "textEditor": true
+        }
+      ],
+      "title": "Tiempo de respuesta de la API (/uselessfacts) vs Endpoint de /fact",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 14,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "variance", "sum"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(sumSeries(stats.timers.app.endpoint.fact_no_cache.timing.*), \"no cached\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(sumSeries(stats.timers.app.endpoint.fact.timing.*), \"cached\")",
+          "textEditor": true
+        }
+      ],
+      "title": "Comparación del tiempo de respuesta con y sin caché en el endpoint /fact",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": -1,
+            "drawStyle": "line",
+            "fillOpacity": 14,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "min", "max", "sum"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.fact.timing.*), \"red\"), \"fact\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.space_news.timing.*), \"red\"), \"space-news\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.metar.timing.*), \"red\"), \"metar\")",
+          "textEditor": true
+        }
+      ],
+      "title": "Monitoreo del tiempo de respuesta de los endpoints /fact, /space_news y /metar en tiempo real",
+      "type": "timeseries"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fill": 7,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 48
+      },
+      "height": "250px",
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": true,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 250,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.15",
+      "pointradius": 5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "B",
+          "target": "aliasByMetric(stats.gauges.$server.scenarioCounts.*)",
+          "textEditor": true
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Scenarios launched (stacked)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:159",
+          "format": "rps",
+          "label": "",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:160",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {
+        "Completed": "#7EB26D",
+        "Errored": "#BF1B00",
+        "Errors count": "#BF1B00",
+        "Limited": "#FDDA0D",
+        "Pending": "#447EBC",
+        "Requests completed": "#7EB26D"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fill": 7,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 55
+      },
+      "height": "250",
+      "hiddenSeries": false,
+      "id": 5,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 250,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.15",
+      "pointradius": 5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refId": "B",
+          "target": "alias(sumSeries(stats.gauges.$server.errors.*), 'Errored')",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refId": "A",
+          "target": "alias(stats.gauges.$server.codes.200, 'Completed')"
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refId": "C",
+          "target": "alias(stats.gauges.$server.pendingRequests, 'Pending')"
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refId": "D",
+          "target": "alias(stats.gauges.$server.codes.429, 'Limited')"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Requests state (stacked)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 62
+      },
+      "height": "250px",
+      "hiddenSeries": false,
+      "id": 3,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 250,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.15",
+      "pointradius": 5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(stats.gauges.$server.scenarioDuration.max, 'Upper')",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(stats.gauges.$server.scenarioDuration.median, 'Median')",
+          "textEditor": true
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Response time (client-side)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:342",
+          "format": "ms",
+          "label": "",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:343",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {
+        "Memory": "#EAB839"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 69
+      },
+      "height": "250px",
+      "hiddenSeries": false,
+      "hideTimeOverride": false,
+      "id": 1,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 250,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.15",
+      "pointradius": 5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "asPercent(stats.gauges.cadvisor.1c23-tp-1_node_1.memory_usage, 1952000000)",
+          "yaxis": 1
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(removeBelowValue(asPercent(derivative(keepLastValue(stats.gauges.cadvisor.$container.cpu_cumulative_usage, 100)), 10000000000), 0.0001), 'CPU')",
+          "textEditor": false
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(asPercent(stats.gauges.cadvisor.$container.memory_working_set, 17179869184), 'Memory')"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Resources",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "Bps",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 26,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "artillery-api",
           "value": "artillery-api"
         },
-        "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "server",
         "options": [
@@ -1043,16 +1157,13 @@
         "type": "custom"
       },
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "1c23-tp-1_node_1",
           "value": "1c23-tp-1_node_1"
         },
-        "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "container",
         "options": [
@@ -1105,7 +1216,7 @@
     ]
   },
   "time": {
-    "from": "now-3m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -1124,7 +1235,8 @@
     "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
-  "title": "Main dashboard",
+  "title": "Dashboard App",
   "uid": "arxIPammk",
-  "version": 3
+  "version": 48,
+  "weekStart": ""
 }
