@@ -190,7 +190,7 @@ async function getSpaceNews() {
     });
 
     await redisClient
-      .set(`space_news_id_${id}`, JSON.stringify(titles), { EX: 5 })
+      .set(`space_news`, JSON.stringify(titles), { EX: 5 })
       .then(() => {
         console.info(`se cachearon los titulos ${titles}`);
       });

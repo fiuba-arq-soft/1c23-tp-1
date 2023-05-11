@@ -471,7 +471,7 @@
         "h": 8
       },
       "type": "timeseries",
-      "title": "Relación entre el timpo de respuesta del endpoint y la api - metar",
+      "title": "Relación entre el tiempo de respuesta del endpoint y la api - metar",
       "datasource": {
         "uid": "hLgr4MU4z",
         "type": "graphite"
@@ -568,60 +568,29 @@
     {
       "id": 13,
       "gridPos": {
-        "x": 0,
-        "y": 8,
+        "h": 8,
         "w": 24,
-        "h": 8
+        "x": 0,
+        "y": 0
       },
       "type": "timeseries",
-      "title": "Relación entre el timpo de respuesta del endpoint y la api - space news",
-      "targets": [
-        {
-          "refId": "A",
-          "datasource": {
-            "type": "graphite",
-            "uid": "hLgr4MU4z"
-          },
-          "target": "alias(sumSeries(stats.timers.app.endpoint.space_news.timing.*), \"endpoint\")",
-          "textEditor": true,
-          "refCount": 0
-        },
-        {
-          "datasource": {
-            "uid": "hLgr4MU4z",
-            "type": "graphite"
-          },
-          "refId": "B",
-          "hide": false,
-          "target": "alias(sumSeries(stats.timers.api.space_news.timing.*), \"api\")",
-          "textEditor": true,
-          "refCount": 0
-        }
-      ],
-      "options": {
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        },
-        "legend": {
-          "showLegend": true,
-          "displayMode": "table",
-          "placement": "right",
-          "calcs": ["mean", "variance", "sum"]
-        }
+      "title": "Relación entre el tiempo de respuesta del endpoint y la api - space news",
+      "datasource": {
+        "uid": "hLgr4MU4z",
+        "type": "graphite"
       },
       "fieldConfig": {
         "defaults": {
           "custom": {
             "drawStyle": "line",
-            "lineInterpolation": "smooth",
+            "lineInterpolation": "linear",
             "barAlignment": 0,
             "lineWidth": 1,
-            "fillOpacity": 8,
+            "fillOpacity": 19,
             "gradientMode": "opacity",
             "spanNulls": false,
             "showPoints": "auto",
-            "pointSize": 5,
+            "pointSize": 4,
             "stacking": {
               "mode": "none",
               "group": "A"
@@ -640,6 +609,9 @@
             },
             "thresholdsStyle": {
               "mode": "off"
+            },
+            "lineStyle": {
+              "fill": "solid"
             }
           },
           "color": {
@@ -650,12 +622,12 @@
             "mode": "absolute",
             "steps": [
               {
-                "value": null,
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
-                "value": 80,
-                "color": "red"
+                "color": "red",
+                "value": 80
               }
             ]
           },
@@ -663,10 +635,41 @@
         },
         "overrides": []
       },
-      "datasource": {
-        "uid": "hLgr4MU4z",
-        "type": "graphite"
-      }
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": ["mean", "variance", "sum"]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(sumSeries(stats.timers.app.endpoint.space_news.timing.*), \"endpoint\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(sumSeries(stats.timers.api.space_news.timing.*), \"api\")",
+          "textEditor": true
+        }
+      ]
     },
     {
       "id": 11,
@@ -677,7 +680,7 @@
         "y": 0
       },
       "type": "timeseries",
-      "title": "Relación entre el timpo de respuesta del endpoint y la api - fact",
+      "title": "Relación entre el tiempo de respuesta del endpoint y la api - fact",
       "datasource": {
         "type": "graphite",
         "uid": "hLgr4MU4z"
