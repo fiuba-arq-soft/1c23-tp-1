@@ -461,6 +461,552 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "id": 14,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 8
+      },
+      "type": "timeseries",
+      "title": "Relación entre el timpo de respuesta del endpoint y la api - metar",
+      "datasource": {
+        "uid": "hLgr4MU4z",
+        "type": "graphite"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "target": "alias(sumSeries(stats.timers.app.endpoint.metar.timing.*), \"endpoint\")",
+          "textEditor": true,
+          "refCount": 0
+        },
+        {
+          "datasource": {
+            "uid": "hLgr4MU4z",
+            "type": "graphite"
+          },
+          "refId": "B",
+          "hide": false,
+          "target": "alias(sumSeries(stats.timers.api.metar.timing.*), \"api\")",
+          "textEditor": true,
+          "refCount": 0
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": ["mean", "variance", "sum"]
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "barAlignment": 0,
+            "lineWidth": 1,
+            "fillOpacity": 8,
+            "gradientMode": "opacity",
+            "spanNulls": false,
+            "showPoints": "auto",
+            "pointSize": 5,
+            "stacking": {
+              "mode": "none",
+              "group": "A"
+            },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "axisColorMode": "text",
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "axisCenteredZero": false,
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "value": null,
+                "color": "green"
+              },
+              {
+                "value": 80,
+                "color": "red"
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 13,
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 24,
+        "h": 8
+      },
+      "type": "timeseries",
+      "title": "Relación entre el timpo de respuesta del endpoint y la api - space news",
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "target": "alias(sumSeries(stats.timers.app.endpoint.space_news.timing.*), \"endpoint\")",
+          "textEditor": true,
+          "refCount": 0
+        },
+        {
+          "datasource": {
+            "uid": "hLgr4MU4z",
+            "type": "graphite"
+          },
+          "refId": "B",
+          "hide": false,
+          "target": "alias(sumSeries(stats.timers.api.space_news.timing.*), \"api\")",
+          "textEditor": true,
+          "refCount": 0
+        }
+      ],
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": ["mean", "variance", "sum"]
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "barAlignment": 0,
+            "lineWidth": 1,
+            "fillOpacity": 8,
+            "gradientMode": "opacity",
+            "spanNulls": false,
+            "showPoints": "auto",
+            "pointSize": 5,
+            "stacking": {
+              "mode": "none",
+              "group": "A"
+            },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "axisColorMode": "text",
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "axisCenteredZero": false,
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "value": null,
+                "color": "green"
+              },
+              {
+                "value": 80,
+                "color": "red"
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "datasource": {
+        "uid": "hLgr4MU4z",
+        "type": "graphite"
+      }
+    },
+    {
+      "id": 11,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "type": "timeseries",
+      "title": "Relación entre el timpo de respuesta del endpoint y la api - fact",
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "barAlignment": 0,
+            "lineWidth": 1,
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "spanNulls": false,
+            "showPoints": "auto",
+            "pointSize": 5,
+            "stacking": {
+              "mode": "none",
+              "group": "A"
+            },
+            "axisPlacement": "left",
+            "axisLabel": "",
+            "axisColorMode": "series",
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "axisCenteredZero": false,
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            },
+            "lineStyle": {
+              "fill": "solid"
+            }
+          },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": ["max", "mean", "variance"]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.fact.timing.*), \"red\"), \"endpoint\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(color(sumSeries(stats.timers.api.fact.timing.*), \"blue\"), \"api\")",
+          "textEditor": true
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "type": "timeseries",
+      "title": "Tiempo de respuesta - endpoints",
+      "datasource": {
+        "uid": "hLgr4MU4z",
+        "type": "graphite"
+      },
+      "description": "Tiempo de respuesta de los endpoints /fact /space_news y /metar",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "barAlignment": -1,
+            "lineWidth": 1,
+            "fillOpacity": 14,
+            "gradientMode": "opacity",
+            "spanNulls": false,
+            "showPoints": "auto",
+            "pointSize": 5,
+            "stacking": {
+              "mode": "none",
+              "group": "A"
+            },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "axisColorMode": "series",
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "axisCenteredZero": false,
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": ["mean", "min", "max", "sum"]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.fact.timing.*), \"red\"), \"fact\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.space_news.timing.*), \"red\"), \"space-news\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.metar.timing.*), \"red\"), \"metar\")",
+          "textEditor": true
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "gridPos": {
+        "h": 24,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "type": "timeseries",
+      "title": "Tiempo de respuesta APIS",
+      "datasource": {
+        "uid": "hLgr4MU4z",
+        "type": "graphite"
+      },
+      "description": "Tiempo de respuesta de las apis de /uselessfacts, /api.spaceflightnewsapi.net y /www.aviationweather.gov\n",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "barAlignment": 0,
+            "lineWidth": 1,
+            "fillOpacity": 25,
+            "gradientMode": "hue",
+            "spanNulls": false,
+            "showPoints": "auto",
+            "pointSize": 5,
+            "stacking": {
+              "mode": "none",
+              "group": "A"
+            },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "axisColorMode": "series",
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "axisCenteredZero": false,
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            },
+            "axisWidth": 50,
+            "lineStyle": {
+              "fill": "solid"
+            }
+          },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "right",
+          "calcs": ["mean", "max", "sum"]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(color(sumSeries(stats.timers.api.fact.timing.*), \"red\"), \"fact\")\n\n",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(color(sumSeries(stats.timers.api.space_news.timing.*), \"blue\"), \"space-news\")\n",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(color(sumSeries(stats.timers.api.metar.timing.*), \"green\"), \"metar\")",
+          "textEditor": true
+        }
+      ]
     }
   ],
   "refresh": "5s",
@@ -572,17 +1118,7 @@
       "2h",
       "1d"
     ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
+    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
   "title": "Main dashboard",
