@@ -5,24 +5,14 @@ import { createClient } from "redis";
 import { XMLParser } from "fast-xml-parser";
 import { decode } from "metar-decoder";
 import { StatsD } from "hot-shots";
-import rateLimit from "express-rate-limit";
-
-const api_limiter = rateLimit({
-    windowMs: 20*60*1000, //20 minutos
-    max: 100,
-    standarHeaders: true,
-    legacyHeaders: false
-})
 
 const statsd_client = new StatsD({
-  "port": "8125",
-  "graphiteHost": "127.0.0.1",
-  "flushInterval": 1000,
-})
+  host: "graphite",
+  port: 8125,
+});
 
 const app = express();
 const redisClient = createClient({ url: "redis://redis:6379" });
-
 
 const start_time = new Date();
 
@@ -43,8 +33,10 @@ app.use((req, res, next) => {
   next();
 });
 
-
-app.get("/ping", api_limiter, async (req, res) => {
+/**
+ * Returns a constant to check App's status
+ */
+app.get("/ping", async (req, res) => {
   res.status(200).send("Todo ok");
 });
 
@@ -54,23 +46,25 @@ app.get("/ping", api_limiter, async (req, res) => {
  */
 async function getFact() {
   let fact_string = await redisClient.get("fact");
-
   if (fact_string !== null) {
+    console.log(`get fact id: ${fact_string}`);
     return { res: JSON.parse(fact_string), status: 200, error_message: "" };
   } else {
     try {
-      let start_api_fact = start_time.getTime()
+      let start_api_fact = start_time.getTime();
       let facts_res = await axios.get(
         "https://uselessfacts.jsph.pl/api/v2/facts/random?language=en"
       );
-      let end_api_fact = start_time.getTime()
+      let end_api_fact = start_time.getTime();
       statsd_client.timing("api.fact.timing", end_api_fact - start_api_fact);
 
       const facts_info = facts_res.data;
       let fact = facts_info.text;
-      redisClient.set("fact", JSON.stringify(fact), { EX: 60 }).then(() => {
-        console.log(`Cached fact id: ${facts_info.id}`);
-      });
+      await redisClient
+        .set("fact", JSON.stringify(fact), { EX: 15 })
+        .then(() => {
+          console.log(`Se llamo y se Cached fact id: ${facts_info.id}`);
+        });
       return { res: fact, status: 200, error_message: "" };
     } catch (err) {
       return { res: null, status: err.status, error_message: err.message };
@@ -78,9 +72,7 @@ async function getFact() {
   }
 }
 
-app.get("/fact", api_limiter, async (req, res) => {
-
-
+app.get("/fact", async (req, res) => {
   let start = start_time.getTime();
 
   let response_fact = await getFact();
@@ -90,17 +82,13 @@ app.get("/fact", api_limiter, async (req, res) => {
       ? response_fact.res
       : response_fact.error_message;
 
-
   let end = start_time.getTime();
   let time_fact = start - end;
-  
-  statsd_client.timing('app.endpoint.fact', time_fact);
-  
-  
+
+  statsd_client.timing("app.endpoint.fact", time_fact);
+
   res.status(response_fact.status).send(message);
 });
-
-
 
 /**
  * Gets or set the station's metar information
@@ -117,7 +105,7 @@ async function getMetarData(req) {
   } else {
     const parser = new XMLParser();
     try {
-      let start_api_metar = start_time.getTime()
+      let start_api_metar = start_time.getTime();
       let response = await axios.get(
         `https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=${code_station}&hoursBeforeNow=1`
       );
@@ -135,7 +123,7 @@ async function getMetarData(req) {
           response_message = metar_info.map((info) => decode(info.raw_text));
         }
         redisClient
-          .set(metar_key, JSON.stringify(response_message), { EX: 20 })
+          .set(metar_key, JSON.stringify(response_message), { EX: 5 })
           .then(() => {
             console.log(`Station ${code_station} cached`);
           });
@@ -157,8 +145,7 @@ async function getMetarData(req) {
   }
 }
 
-app.get("/metar", api_limiter, async (req, res) => {
-
+app.get("/metar", async (req, res) => {
   let start = start_time.getTime();
 
   let response = await getMetarData(req);
@@ -166,7 +153,6 @@ app.get("/metar", api_limiter, async (req, res) => {
   let message = response.status == 200 ? response.res : response.error_message;
   let end = start_time.getTime();
   let endpoint_time_metar_response = start - end;
-
 
   statsd_client.timing(
     "app.endpoint.metar.timing",
@@ -179,45 +165,52 @@ app.get("/metar", api_limiter, async (req, res) => {
  * Get or set the titles of 5 articles
  * @returns {res: [], status: requestStatusCode, error_message: ""}
  */
-async function getSpaceNews(){
-
-  let spaces_news = redisClient.get("space_news");
+async function getSpaceNews() {
+  let spaces_news = redisClient.get(`space_news`);
   if (!spaces_news) {
+    console.log(`Cached fact id: ${spaces_news}`);
     return { res: JSON.parse(spaces_news), status: 200, error_message: "" };
   }
   try {
-    let start_api_space_news = start_time.getTime()
-    const response = await axios.get('https://api.spaceflightnewsapi.net/v3/articles?_limit=5')
+    let start_api_space_news = start_time.getTime();
+    const response = await axios.get(
+      "https://api.spaceflightnewsapi.net/v3/articles?_limit=5"
+    );
     let end_api_space_news = start_time.getTime();
-    statsd_client.timing("api.space_news.timing", end_api_space_news - start_api_space_news);
+    statsd_client.timing(
+      "api.space_news.timing",
+      end_api_space_news - start_api_space_news
+    );
     let titles = [];
 
-    response.data.forEach(element => {
-        if (element.hasOwnProperty('title')){
-            titles.push(element.title);
-        }
+    response.data.forEach((element) => {
+      if (element.hasOwnProperty("title")) {
+        titles.push(element.title);
+      }
     });
 
-    redisClient.set('space_news',JSON.stringify(titles),{EX:5}) 
-    return {res: titles, status: 200, error_message: ""};
+    await redisClient
+      .set(`space_news_id_${id}`, JSON.stringify(titles), { EX: 5 })
+      .then(() => {
+        console.info(`se cachearon los titulos ${titles}`);
+      });
+    return { res: titles, status: 200, error_message: "" };
   } catch (error) {
-    return {res: null, status: error.status, error_message: error.message};
+    return { res: null, status: error.status, error_message: error.message };
   }
-  
 }
 
-app.get('/space_news', api_limiter, async (req,res) => {
-
+app.get("/space_news", async (req, res) => {
   let start = start_time.getTime();
-  let response = getSpaceNews();
+  let response = await getSpaceNews();
   let end = start_time.getTime();
   let endpoint_time_space_news = start - end;
   let message = response.res ?? res.error_message;
-  statsd_client.timing("app.endpoint.space_news.timing", endpoint_time_space_news);
-  req.status(response.status).send(message);
-  
+  statsd_client.timing(
+    "app.endpoint.space_news.timing",
+    endpoint_time_space_news
+  );
+  res.status(response.status).send(message);
 });
 
-
 app.listen(3000);
-
