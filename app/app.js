@@ -166,8 +166,8 @@ app.get("/metar", async (req, res) => {
  * @returns {res: [], status: requestStatusCode, error_message: ""}
  */
 async function getSpaceNews() {
-  let spaces_news = redisClient.get(`space_news`);
-  if (!spaces_news) {
+  let spaces_news = await redisClient.get(`space_news`);
+  if (spaces_news !== null) {
     console.log(`Cached fact id: ${spaces_news}`);
     return { res: JSON.parse(spaces_news), status: 200, error_message: "" };
   }

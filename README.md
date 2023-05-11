@@ -48,6 +48,13 @@ Toda información obtenida mediante las apis, fueron cacheados con redis. A la h
 
 ## Metricas
 
+Gráficos adicionales obtenidos adicionalmente al dashboard original:
+
+- Demora de cada endpoint en responder
+- Demora de cada API remota en responder
+
+# Resultados obtenidos.
+
 ### Ping
 
 Como especificamos anteriormente, es un simple healthcheck por lo que se espera un tiempo de respuesta bajo como asi tambien su uso recursos.
@@ -57,7 +64,7 @@ Como especificamos anteriormente, es un simple healthcheck por lo que se espera 
 
 ### Api vs Endpoint
 
-![](files/spaceNews/endpoint_vs_api.jpeg)
+![](files/spaceNews/api_vs_endpoint.jpg)
 
 ### Metricas del server
 
@@ -72,3 +79,7 @@ Como especificamos anteriormente, es un simple healthcheck por lo que se espera 
 ## Metar
 
 ![](files/metar/metricas_api_vs_endpoint.jpeg)
+
+## Comparaciones generales
+
+![](files/metricas_3_juntos.png)
