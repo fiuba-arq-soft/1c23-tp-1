@@ -85,7 +85,7 @@ app.get("/fact", async (req, res) => {
   let end = start_time.getTime();
   let time_fact = start - end;
 
-  statsd_client.timing("app.endpoint.fact", time_fact);
+  statsd_client.timing("app.endpoint.fact.timing", time_fact);
 
   res.status(response_fact.status).send(message);
 });
