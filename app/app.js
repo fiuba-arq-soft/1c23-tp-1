@@ -213,4 +213,39 @@ app.get("/space_news", async (req, res) => {
   res.status(response.status).send(message);
 });
 
+
+/**
+ * Gets random fact information without cache
+ * @returns 
+ */
+async function getFactNoCached() {
+  try {
+    let start_api_fact = start_time.getTime();
+    let facts_res = await axios.get(
+      "https://uselessfacts.jsph.pl/api/v2/facts/random?language=en"
+    );
+    let end_api_fact = start_time.getTime();
+    statsd_client.timing("api.fact_no_cache.timing", end_api_fact - start_api_fact);
+
+    const facts_info = facts_res.data;
+    let fact = facts_info.text;
+    return { res: fact, status: 200, error_message: "" };
+  } catch (err) {
+    return { res: null, status: err.status, error_message: err.message };
+  }
+}
+
+app.get("/fact_no_cache", async(req, res) => {
+    let start = start_time.getTime();
+    let response = await getFactNoCached();
+    let end = start_time.getTime();
+    let endpoint_time_space_news = start - end;
+    let message = response.res ?? res.error_message;
+    statsd_client.timing(
+      "app.endpoint.fact_no_cache.timing",
+      endpoint_time_space_news
+    );
+    res.status(response.status).send(message);
+})
+
 app.listen(3000);
