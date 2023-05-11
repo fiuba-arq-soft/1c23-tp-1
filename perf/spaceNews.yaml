@@ -11,13 +11,22 @@ config:
   pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
 
   phases:
-    - name: Ramp
+    - name: start
       duration: 30
-      arrivalRate: 1
-      rampTo: 5
-    - name: Plain
-      duration: 60
+      arrivalRate: 3
+    - name: firstRamp
+      duration: 15
       arrivalRate: 5
+      rampTo: 15
+    - name: plain
+      duration: 40
+      arrivalRate: 15
+    - name: rampdown
+      duration: 30
+      arrivalRate: 5
+    - name: rest 
+      duration: 30
+      arrivalRate: 0
     
 
 scenarios:

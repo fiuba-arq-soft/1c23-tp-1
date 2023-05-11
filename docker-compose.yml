@@ -50,7 +50,8 @@ services:
       - "/:/rootfs:ro"
       - "/var/run:/var/run:rw"
       - "/sys:/sys:ro"
-      - "/var/lib/docker/:/var/lib/docker:ro"
+     # - "/var/lib/docker/:/var/lib/docker:ro"
+      - /var/snap/docker/common/var-lib-docker:/var/lib/docker:ro   #Se agrega esta linea porque en una de las maquinas estaba instalado con snap y sino no corria bien.
 volumes:
   grafana_config:
     driver: local
