@@ -16,7 +16,23 @@ Luego de que se hayan levantado los servicios, verificaremos que esten correctos
 
 Este endpoint nos devolvera un valor constante.
 
-### Endpoints:
+## Vista de conectores y servicios
+
+A continuación se muestra el diagrama de Vista de Componentes y Conectores para el caso base, el cual contempla un solo nodo, y para el caso en donde se tienen Réplicas de la API.
+
+## Caso base
+
+Se pudo constatar que el proceso de consulta, tanto a través de Artillery como por medio de un cliente, transita por el proxy de Nginx en primer lugar, el cual se encarga de remitir la petición correspondiente al servidor de origen. Además, se dispone del servicio de Node.js, que efectúa solicitudes a las APIs externas mencionadas previamente.
+
+![](files/conectores/conectores_1_nodo.png)
+
+## Caso 3 replicas
+
+La principal distinción con el caso previo radica en que se observa a Nginx desempeñándose como un balanceador de carga, distribuyendo el tráfico a cada una de las instancias de nuestro servicio.
+
+![](files/conectores/conectores_3_nodos.png)
+
+## Endpoints:
 
 - `/ping`: Este endpoint devolverá un valor constante, sin procesamiento. Lo utilizaremos como healthcheck y como baseline para comparar con los demás.
 
@@ -26,7 +42,7 @@ Este endpoint nos devolvera un valor constante.
 
 - `/fact`: Devolveremos 1 hecho sin utilidad por cada invocación a nuestro endpoint, obtenido desde uselessfacts.
 
-### Performace
+## Performace
 
 Para poder analizar la performace de nuestro programa, se uso Artillery como generador de cargas. Dividiendo las fases en estos pasos:
 
@@ -84,7 +100,6 @@ Otra cosa a destacar es su bajo tiempo de respuesta, esto se debe a todas las he
 
 ## Fact
 
-
 ![](files/fact/metrics_cached_no_cached.png)
 
 Algo importante que observamos, es que el tiempo de respuesta con o si cache son muy similares. Esto puede deberse a que el endpoint no se esta utilizando con suficiente frecuencia o quiza el endpoint ya de por si es muy rapido. En ambos casos la utilizacion de la cache no va a impactar significativamente en el tiempo de respuesta como en los casos anteriores.
@@ -93,7 +108,7 @@ Otra observación para analizar, es que de todos los request que se solicitaron,
 
 ![](files/fact/metricas_api_vs_endpoint.jpeg)
 
-Como pasa anteriormente, el tiempo de respuesta del endpoint es bastante mayor al de la api. 
+Como pasa anteriormente, el tiempo de respuesta del endpoint es bastante mayor al de la api.
 
 ## Metar
 
@@ -103,7 +118,7 @@ En los resultados observados al mandar solicitudes en esta api, no se observan d
 
 ## Comparaciones generales
 
-En los siguientes gráficos, podemos observar el comportamiento y rendimiento de la aplicación a la hora de ejecutar 3 pruebas simultaneas que consumen 3 endpoints diferentes. Podemos observar que la aplicación pudo mantener la conectividad durante las pruebas, y cada endpoint tuvo un promedio de 120 ms de respuesta por request. 
+En los siguientes gráficos, podemos observar el comportamiento y rendimiento de la aplicación a la hora de ejecutar 3 pruebas simultaneas que consumen 3 endpoints diferentes. Podemos observar que la aplicación pudo mantener la conectividad durante las pruebas, y cada endpoint tuvo un promedio de 120 ms de respuesta por request.
 La aplicación en promedio tardo 749 ms en devolverle una respuesta al cliente.
 
 ![](files/metricas_3_juntos.png)
