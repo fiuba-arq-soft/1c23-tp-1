@@ -5,6 +5,12 @@ import { createClient } from "redis";
 import { XMLParser } from "fast-xml-parser";
 import { decode } from "metar-decoder";
 import { StatsD } from "hot-shots";
+import { rateLimiter } from "express-rate-limiter";
+
+const limiter = rateLimiter({
+  windowMs: 40 * 1000,
+  max: 500,
+});
 
 const statsd_client = new StatsD({
   host: "graphite",
@@ -44,35 +50,34 @@ app.get("/ping", async (req, res) => {
  * Gets or set random fact information
  * @returns
  */
-async function getFact() {
-  let fact_string = await redisClient.get("fact");
-  if (fact_string !== null) {
-    console.log(`get fact id: ${fact_string}`);
-    return { res: JSON.parse(fact_string), status: 200, error_message: "" };
-  } else {
-    try {
-      let start_api_fact = start_time.getTime();
-      let facts_res = await axios.get(
-        "https://uselessfacts.jsph.pl/api/v2/facts/random?language=en"
-      );
-      let end_api_fact = start_time.getTime();
-      statsd_client.timing("api.fact.timing", end_api_fact - start_api_fact);
-
-      const facts_info = facts_res.data;
-      let fact = facts_info.text;
-      await redisClient
-        .set("fact", JSON.stringify(fact), { EX: 15 })
-        .then(() => {
-          console.log(`Se llamo y se Cached fact id: ${facts_info.id}`);
-        });
-      return { res: fact, status: 200, error_message: "" };
-    } catch (err) {
-      return { res: null, status: err.status, error_message: err.message };
+async function getFact(useCache = true) {
+  if (useCache) {
+    let fact_string = await redisClient.get("fact");
+    if (fact_string !== null) {
+      console.log(`get fact id: ${fact_string}`);
+      return { res: JSON.parse(fact_string), status: 200, error_message: "" };
     }
+  }
+  try {
+    let start_api_fact = start_time.getTime();
+    let facts_res = await axios.get(
+      "https://uselessfacts.jsph.pl/api/v2/facts/random?language=en"
+    );
+    let end_api_fact = start_time.getTime();
+    statsd_client.timing("api.fact.timing", end_api_fact - start_api_fact);
+
+    const facts_info = facts_res.data;
+    let fact = facts_info.text;
+    await redisClient.set("fact", JSON.stringify(fact), { EX: 15 }).then(() => {
+      console.log(`Se llamo y se Cached fact id: ${facts_info.id}`);
+    });
+    return { res: fact, status: 200, error_message: "" };
+  } catch (err) {
+    return { res: null, status: err.status, error_message: err.message };
   }
 }
 
-app.get("/fact", async (req, res) => {
+app.get("/fact", limiter, async (req, res) => {
   let start = start_time.getTime();
 
   let response_fact = await getFact();
@@ -95,57 +100,59 @@ app.get("/fact", async (req, res) => {
  * @param {string} station
  * @returns
  */
-async function getMetarData(req) {
+async function getMetarData(req, useCache = true) {
   let response_message;
   const code_station = req.query.station;
-  let metar_key = `metar_${code_station ?? "null"}_key`;
-  let metar_string = await redisClient.get(metar_key);
-  if (metar_string !== null) {
-    return { res: JSON.parse(metar_string), status: 200, error_message: "" };
-  } else {
-    const parser = new XMLParser();
-    try {
-      let start_api_metar = start_time.getTime();
-      let response = await axios.get(
-        `https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=${code_station}&hoursBeforeNow=1`
-      );
-      let end_api_metar = start_time.getTime();
-
-      statsd_client.timing("api.metar.timing", end_api_metar - start_api_metar);
-
-      const parsed = parser.parse(response.data);
-
-      if (parsed.response.data.hasOwnProperty("METAR")) {
-        const metar_info = parsed.response.data.METAR;
-        if (metar_info.hasOwnProperty("raw_text")) {
-          response_message = decode(metar_info.raw_text);
-        } else {
-          response_message = metar_info.map((info) => decode(info.raw_text));
-        }
-        await redisClient
-          .set(metar_key, JSON.stringify(response_message), { EX: 5 })
-          .then(() => {
-            console.log(`Station ${code_station} cached`);
-          });
-        return {
-          res: response_message,
-          status: 200,
-          error_message: "",
-        };
-      } else {
-        return {
-          res: null,
-          status: 404,
-          error_message: `Metar no encontro información sobre la estación: ${code_station}`,
-        };
-      }
-    } catch (err) {
-      return { res: null, status: err.status, error_message: err.message };
-    }
+  if(useCache) {
+    let metar_key = `metar_${code_station ?? "null"}_key`;
+    let metar_string = await redisClient.get(metar_key);
+    if (metar_string !== null) {
+      return { res: JSON.parse(metar_string), status: 200, error_message: "" };
+    }  
   }
+  const parser = new XMLParser();
+  try {
+    let start_api_metar = start_time.getTime();
+    let response = await axios.get(
+      `https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=${code_station}&hoursBeforeNow=1`
+    );
+    let end_api_metar = start_time.getTime();
+
+    statsd_client.timing("api.metar.timing", end_api_metar - start_api_metar);
+
+    const parsed = parser.parse(response.data);
+
+    if (parsed.response.data.hasOwnProperty("METAR")) {
+      const metar_info = parsed.response.data.METAR;
+      if (metar_info.hasOwnProperty("raw_text")) {
+        response_message = decode(metar_info.raw_text);
+      } else {
+        response_message = metar_info.map((info) => decode(info.raw_text));
+      }
+      await redisClient
+        .set(metar_key, JSON.stringify(response_message), { EX: 5 })
+        .then(() => {
+          console.log(`Station ${code_station} cached`);
+        });
+      return {
+        res: response_message,
+        status: 200,
+        error_message: "",
+      };
+    } else {
+      return {
+        res: null,
+        status: 404,
+        error_message: `Metar no encontro información sobre la estación: ${code_station}`,
+      };
+    }
+  } catch (err) {
+    return { res: null, status: err.status, error_message: err.message };
+  }
+  
 }
 
-app.get("/metar", async (req, res) => {
+app.get("/metar", limiter, async (req, res) => {
   let start = start_time.getTime();
 
   let response = await getMetarData(req);
@@ -165,11 +172,13 @@ app.get("/metar", async (req, res) => {
  * Get or set the titles of 5 articles
  * @returns {res: [], status: requestStatusCode, error_message: ""}
  */
-async function getSpaceNews() {
-  let spaces_news = await redisClient.get(`space_news`);
-  if (spaces_news !== null) {
-    console.log(`Cached fact id: ${spaces_news}`);
-    return { res: JSON.parse(spaces_news), status: 200, error_message: "" };
+async function getSpaceNews(useCache = true) {
+  if (useCache) {
+    let spaces_news = await redisClient.get(`space_news`);
+    if (spaces_news !== null) {
+      console.log(`Cached fact id: ${spaces_news}`);
+      return { res: JSON.parse(spaces_news), status: 200, error_message: "" };
+    }
   }
   try {
     let start_api_space_news = start_time.getTime();
@@ -200,7 +209,7 @@ async function getSpaceNews() {
   }
 }
 
-app.get("/space_news", async (req, res) => {
+app.get("/space_news", limiter, async (req, res) => {
   let start = start_time.getTime();
   let response = await getSpaceNews();
   let end = start_time.getTime();
@@ -213,39 +222,17 @@ app.get("/space_news", async (req, res) => {
   res.status(response.status).send(message);
 });
 
-
-/**
- * Gets random fact information without cache
- * @returns 
- */
-async function getFactNoCached() {
-  try {
-    let start_api_fact = start_time.getTime();
-    let facts_res = await axios.get(
-      "https://uselessfacts.jsph.pl/api/v2/facts/random?language=en"
-    );
-    let end_api_fact = start_time.getTime();
-    statsd_client.timing("api.fact_no_cache.timing", end_api_fact - start_api_fact);
-
-    const facts_info = facts_res.data;
-    let fact = facts_info.text;
-    return { res: fact, status: 200, error_message: "" };
-  } catch (err) {
-    return { res: null, status: err.status, error_message: err.message };
-  }
-}
-
-app.get("/fact_no_cache", async(req, res) => {
-    let start = start_time.getTime();
-    let response = await getFactNoCached();
-    let end = start_time.getTime();
-    let endpoint_time_space_news = start - end;
-    let message = response.res ?? res.error_message;
-    statsd_client.timing(
-      "app.endpoint.fact_no_cache.timing",
-      endpoint_time_space_news
-    );
-    res.status(response.status).send(message);
-})
+app.get("/fact_no_cache", limiter, async (req, res) => {
+  let start = start_time.getTime();
+  let response = await getFact(false);
+  let end = start_time.getTime();
+  let endpoint_time_space_news = start - end;
+  let message = response.res ?? res.error_message;
+  statsd_client.timing(
+    "app.endpoint.fact_no_cache.timing",
+    endpoint_time_space_news
+  );
+  res.status(response.status).send(message);
+});
 
 app.listen(3000);
