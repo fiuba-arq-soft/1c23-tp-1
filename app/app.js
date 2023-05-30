@@ -223,7 +223,8 @@ app.get("/space_news", limiter, async (req, res) => {
 });
 
 
-/** NO CACHE ENDPOINTS */
+/************** NO CACHE ENDPOINTS **************/
+
 app.get("/fact_no_cache", limiter, async (req, res) => {
   let start = start_time.getTime();
   let response = await getFact(false);

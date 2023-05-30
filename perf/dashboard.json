@@ -127,7 +127,7 @@
           "textEditor": true
         }
       ],
-      "title": "Tiempo de respuesta de la API (/www.aviationweather.gov) vs Endpoint de /metar",
+      "title": "Tiempo de respuesta de la API (/www.aviationweather.gov) vs Endpoint de /metar (ambos con cache)",
       "type": "timeseries"
     },
     {
@@ -255,7 +255,7 @@
           "textEditor": true
         }
       ],
-      "title": "Tiempo de respuesta de la API (/api.spaceflightnewsapi.net) vs Endpoint de /space_news",
+      "title": "Tiempo de respuesta de la API (/api.spaceflightnewsapi.net) vs Endpoint de /space_news (ambos con cache)",
       "type": "timeseries"
     },
     {
@@ -389,6 +389,123 @@
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisWidth": 50,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "max", "sum"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(color(sumSeries(stats.timers.api.fact_no_cache.timing.*), \"red\"), \"fact_no_cache\")\n\n",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(color(sumSeries(stats.timers.api.space_news_no_cache.timing.*), \"blue\"), \"space-news_no_cache\")\n",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(color(sumSeries(stats.timers.api.metar_no_cache.timing.*), \"green\"), \"metar_no_cache\")",
+          "textEditor": true
+        }
+      ],
+      "title": "Tiempo de respuesta de las APIs utilizadas por los endpoints /fact_no_cache, /space_news_no_cache y /metar_no_cache",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
             "axisPlacement": "left",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -439,7 +556,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 36
       },
       "id": 11,
       "options": {
@@ -477,7 +594,7 @@
           "textEditor": true
         }
       ],
-      "title": "Tiempo de respuesta de la API (/uselessfacts) vs Endpoint de /fact",
+      "title": "Tiempo de respuesta de la API (/uselessfacts) vs Endpoint de /fact (ambos con cache)",
       "type": "timeseries"
     },
     {
@@ -541,7 +658,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 43
       },
       "id": 9,
       "options": {
@@ -643,7 +760,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 50
       },
       "id": 18,
       "options": {
@@ -745,7 +862,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 57
       },
       "id": 19,
       "options": {
@@ -847,7 +964,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 64
       },
       "id": 12,
       "options": {
@@ -896,7 +1013,120 @@
           "textEditor": true
         }
       ],
-      "title": "Monitoreo del tiempo de respuesta de los endpoints /fact, /space_news y /metar en tiempo real",
+      "title": "Monitoreo del tiempo de respuesta de los endpoints /fact, /space_news y /metar en tiempo real (con cache)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": -1,
+            "drawStyle": "line",
+            "fillOpacity": 14,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 72
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "min", "max", "sum"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.fact_no_cache.timing.*), \"red\"), \"fact\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.space_news_no_cache.timing.*), \"red\"), \"space-news\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(color(sumSeries(stats.timers.app.endpoint.metar_no_cache.timing.*), \"red\"), \"metar\")",
+          "textEditor": true
+        }
+      ],
+      "title": "Monitoreo del tiempo de respuesta de los endpoints /fact, /space_news y /metar en tiempo real (sin cache)",
       "type": "timeseries"
     },
     {
@@ -914,7 +1144,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 62
+        "y": 80
       },
       "height": "250px",
       "hiddenSeries": false,
@@ -1015,7 +1245,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 69
+        "y": 87
       },
       "height": "250",
       "hiddenSeries": false,
@@ -1129,7 +1359,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 76
+        "y": 94
       },
       "height": "250px",
       "hiddenSeries": false,
@@ -1237,7 +1467,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 83
+        "y": 101
       },
       "height": "250px",
       "hiddenSeries": false,
@@ -1441,6 +1671,6 @@
   "timezone": "",
   "title": "Dashboard App",
   "uid": "arxIPammk",
-  "version": 52,
+  "version": 60,
   "weekStart": ""
 }
