@@ -594,6 +594,210 @@
           },
           "custom": {
             "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 14,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "variance", "sum"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(sumSeries(stats.timers.app.endpoint.space_news_no_cache.timing.*), \"no cached\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(sumSeries(stats.timers.app.endpoint.space_news.timing.*), \"cached\")",
+          "textEditor": true
+        }
+      ],
+      "title": "Comparación del tiempo de respuesta con y sin caché en el endpoint /space_news",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 14,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 47
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "variance", "sum"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(sumSeries(stats.timers.app.endpoint.metar_no_cache.timing.*), \"no cached\")",
+          "textEditor": true
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "hide": false,
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(sumSeries(stats.timers.app.endpoint.metar.timing.*), \"cached\")",
+          "textEditor": true
+        }
+      ],
+      "title": "Comparación del tiempo de respuesta con y sin caché en el endpoint /metar",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "hLgr4MU4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
@@ -643,7 +847,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 54
       },
       "id": 12,
       "options": {
@@ -710,7 +914,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 62
       },
       "height": "250px",
       "hiddenSeries": false,
@@ -811,7 +1015,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 55
+        "y": 69
       },
       "height": "250",
       "hiddenSeries": false,
@@ -925,7 +1129,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 62
+        "y": 76
       },
       "height": "250px",
       "hiddenSeries": false,
@@ -1033,7 +1237,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 69
+        "y": 83
       },
       "height": "250px",
       "hiddenSeries": false,
@@ -1158,7 +1362,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "1c23-tp-1_node_1",
           "value": "1c23-tp-1_node_1"
         },
@@ -1237,6 +1441,6 @@
   "timezone": "",
   "title": "Dashboard App",
   "uid": "arxIPammk",
-  "version": 48,
+  "version": 52,
   "weekStart": ""
 }
