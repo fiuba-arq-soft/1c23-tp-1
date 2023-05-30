@@ -222,15 +222,45 @@ app.get("/space_news", limiter, async (req, res) => {
   res.status(response.status).send(message);
 });
 
+
+/** NO CACHE ENDPOINTS */
 app.get("/fact_no_cache", limiter, async (req, res) => {
   let start = start_time.getTime();
   let response = await getFact(false);
   let end = start_time.getTime();
+  let endpoint_time_fact = start - end;
+  let message = response.res ?? res.error_message;
+  statsd_client.timing("app.endpoint.fact_no_cache.timing", endpoint_time_fact);
+  res.status(response.status).send(message);
+});
+
+
+app.get("/space_news_no_cache", limiter, async (req, res) => {
+  let start = start_time.getTime();
+  let response = await getSpaceNews(false);
+  let end = start_time.getTime();
   let endpoint_time_space_news = start - end;
   let message = response.res ?? res.error_message;
   statsd_client.timing(
-    "app.endpoint.fact_no_cache.timing",
+    "app.endpoint.space_news_no_cache.timing",
     endpoint_time_space_news
+  );
+  res.status(response.status).send(message);
+});
+
+
+app.get("/metar_no_cache", limiter, async (req, res) => {
+  let start = start_time.getTime();
+
+  let response = await getMetarData(req, false);
+  console.info(response);
+  let message = response.status == 200 ? response.res : response.error_message;
+  let end = start_time.getTime();
+  let endpoint_time_metar_response = start - end;
+
+  statsd_client.timing(
+    "app.endpoint.metar_no_cache.timing",
+    endpoint_time_metar_response
   );
   res.status(response.status).send(message);
 });
