@@ -60,7 +60,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 1
+            "y": 9
           },
           "height": "250",
           "hiddenSeries": false,
@@ -174,7 +174,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 8
+            "y": 16
           },
           "height": "250px",
           "hiddenSeries": false,
@@ -280,7 +280,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 15
+            "y": 23
           },
           "height": "250px",
           "hiddenSeries": false,
@@ -376,7 +376,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 22
+            "y": 30
           },
           "height": "250px",
           "hiddenSeries": false,
@@ -530,7 +530,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -546,7 +547,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 1
+            "y": 10
           },
           "id": 12,
           "options": {
@@ -643,7 +644,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -659,7 +661,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 9
+            "y": 18
           },
           "id": 20,
           "options": {
@@ -773,7 +775,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -812,7 +815,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 6
+            "y": 10
           },
           "id": 13,
           "options": {
@@ -898,7 +901,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -914,7 +918,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 14
+            "y": 18
           },
           "id": 14,
           "options": {
@@ -1004,7 +1008,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1020,7 +1025,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 22
+            "y": 26
           },
           "id": 15,
           "options": {
@@ -1121,7 +1126,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1137,7 +1143,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 32
+            "y": 36
           },
           "id": 21,
           "options": {
@@ -1237,7 +1243,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1253,7 +1260,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 42
+            "y": 46
           },
           "id": 11,
           "options": {
@@ -1291,7 +1298,7 @@
               "textEditor": true
             }
           ],
-          "title": "Tiempo de respuesta de la API (/uselessfacts) vs Endpoint de /fact (ambos con cache)",
+          "title": "Tiempo de respuesta de la API (/uselessfacts) vs Endpoint de /fact",
           "type": "timeseries"
         }
       ],
@@ -1353,7 +1360,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1369,7 +1377,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 38
+            "y": 4
           },
           "id": 34,
           "options": {
@@ -1445,7 +1453,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1461,7 +1470,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 45
+            "y": 11
           },
           "id": 35,
           "options": {
@@ -1537,7 +1546,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1553,7 +1563,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 52
+            "y": 18
           },
           "id": 19,
           "options": {
@@ -1592,6 +1602,97 @@
             }
           ],
           "title": "Comparación del tiempo de respuesta con y sin caché en el endpoint /metar",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 12,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 25
+          },
+          "id": 45,
+          "options": {
+            "legend": {
+              "calcs": ["min", "max", "mean", "sum"],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "graphite",
+                "uid": "hLgr4MU4z"
+              },
+              "refId": "A",
+              "target": "alias(color(sumSeries(stats.timers.api.metar.timing.*), \"red\"), \"API\")",
+              "textEditor": true
+            }
+          ],
+          "title": "Latencia de la API utilizada en /metar y /metar_no_cache",
           "type": "timeseries"
         }
       ],
@@ -1653,7 +1754,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1669,7 +1771,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 4
+            "y": 5
           },
           "id": 36,
           "options": {
@@ -1745,7 +1847,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1761,7 +1864,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 11
+            "y": 12
           },
           "id": 37,
           "options": {
@@ -1837,7 +1940,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1853,7 +1957,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 18
+            "y": 19
           },
           "id": 18,
           "options": {
@@ -1893,6 +1997,97 @@
           ],
           "title": "Comparación del tiempo de respuesta con y sin caché en el endpoint /space_news",
           "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 12,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 26
+          },
+          "id": 43,
+          "options": {
+            "legend": {
+              "calcs": ["min", "mean", "max", "sum"],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "graphite",
+                "uid": "hLgr4MU4z"
+              },
+              "refId": "A",
+              "target": "alias(color(sumSeries(stats.timers.api.space_news.timing.*), \"red\"), \"API\")",
+              "textEditor": true
+            }
+          ],
+          "title": "Latencia de la API utilizada en /space_news y /space_news_no_cache",
+          "type": "timeseries"
         }
       ],
       "title": "/space_news & /space_news_no_cache",
@@ -1908,6 +2103,97 @@
       },
       "id": 23,
       "panels": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "hLgr4MU4z"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 12,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 6
+          },
+          "id": 44,
+          "options": {
+            "legend": {
+              "calcs": ["min", "max", "mean", "sum"],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "graphite",
+                "uid": "hLgr4MU4z"
+              },
+              "refId": "A",
+              "target": "alias(color(sumSeries(stats.timers.api.fact.timing.*), \"red\"), \"API\")",
+              "textEditor": true
+            }
+          ],
+          "title": "Latencia de la API utilizada en /fact y /fact_no_cache",
+          "type": "timeseries"
+        },
         {
           "datasource": {
             "type": "graphite",
@@ -1953,7 +2239,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1969,7 +2256,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 6
+            "y": 13
           },
           "id": 41,
           "options": {
@@ -2045,7 +2332,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2061,7 +2349,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 13
+            "y": 20
           },
           "id": 40,
           "options": {
@@ -2137,7 +2425,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2153,7 +2442,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 20
+            "y": 27
           },
           "id": 9,
           "options": {
@@ -2308,6 +2597,6 @@
   "timezone": "",
   "title": "Dashboard App",
   "uid": "arxIPammk",
-  "version": 73,
+  "version": 81,
   "weekStart": ""
 }
