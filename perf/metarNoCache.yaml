@@ -39,9 +39,9 @@ config:
       - "KORD"
 
 scenarios:
-  - name: Metar (/metar)
+  - name: Metar No Cache (/metar_no_cache)
     flow:
       - get:
-          url: "/metar"
+          url: "/metar_no_cache"
           qs:
             station: "{{station}}"

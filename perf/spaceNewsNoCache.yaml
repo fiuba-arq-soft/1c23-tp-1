@@ -1,7 +1,7 @@
 config:
   environments:
     api:
-      target: "http://localhost:5555/api"
+      target: 'http://localhost:5555/api'
       plugins:
         statsd:
           host: localhost
@@ -9,7 +9,7 @@ config:
           prefix: "artillery-api"
 
   pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
-  
+
   phases:
     - name: start
       duration: 30
@@ -29,19 +29,8 @@ config:
       arrivalRate: 0
     
 
-  variables:
-    station:
-      - "SBJH"
-      - "KMIA"
-      - "SAEZ"
-      - "KJFK"
-      - "KSFO"
-      - "KORD"
-
 scenarios:
-  - name: Metar (/metar)
+  - name: Space News No Cache (/space_news_no_cache)
     flow:
       - get:
-          url: "/metar"
-          qs:
-            station: "{{station}}"
+          url: '/space_news_no_cache'

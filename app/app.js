@@ -103,12 +103,12 @@ app.get("/fact", limiter, async (req, res) => {
 async function getMetarData(req, useCache = true) {
   let response_message;
   const code_station = req.query.station;
-  if(useCache) {
+  if (useCache) {
     let metar_key = `metar_${code_station ?? "null"}_key`;
     let metar_string = await redisClient.get(metar_key);
     if (metar_string !== null) {
       return { res: JSON.parse(metar_string), status: 200, error_message: "" };
-    }  
+    }
   }
   const parser = new XMLParser();
   try {
@@ -149,14 +149,12 @@ async function getMetarData(req, useCache = true) {
   } catch (err) {
     return { res: null, status: err.status, error_message: err.message };
   }
-  
 }
 
 app.get("/metar", limiter, async (req, res) => {
   let start = start_time.getTime();
 
   let response = await getMetarData(req);
-  console.info(response);
   let message = response.status == 200 ? response.res : response.error_message;
   let end = start_time.getTime();
   let endpoint_time_metar_response = start - end;
@@ -222,7 +220,6 @@ app.get("/space_news", limiter, async (req, res) => {
   res.status(response.status).send(message);
 });
 
-
 /************** NO CACHE ENDPOINTS **************/
 
 app.get("/fact_no_cache", limiter, async (req, res) => {
@@ -234,7 +231,6 @@ app.get("/fact_no_cache", limiter, async (req, res) => {
   statsd_client.timing("app.endpoint.fact_no_cache.timing", endpoint_time_fact);
   res.status(response.status).send(message);
 });
-
 
 app.get("/space_news_no_cache", limiter, async (req, res) => {
   let start = start_time.getTime();
@@ -249,12 +245,10 @@ app.get("/space_news_no_cache", limiter, async (req, res) => {
   res.status(response.status).send(message);
 });
 
-
 app.get("/metar_no_cache", limiter, async (req, res) => {
   let start = start_time.getTime();
 
   let response = await getMetarData(req, false);
-  console.info(response);
   let message = response.status == 200 ? response.res : response.error_message;
   let end = start_time.getTime();
   let endpoint_time_metar_response = start - end;
