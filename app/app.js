@@ -5,7 +5,7 @@ import { createClient } from "redis";
 import { XMLParser } from "fast-xml-parser";
 import { decode } from "metar-decoder";
 import { StatsD } from "hot-shots";
-import { rateLimiter } from "express-rate-limiter";
+import  rateLimiter from "express-rate-limit";
 
 const limiter = rateLimiter({
   windowMs: 40 * 1000,

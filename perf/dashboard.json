@@ -530,8 +530,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -644,8 +643,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -775,8 +773,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -815,7 +812,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 10
+            "y": 3
           },
           "id": 13,
           "options": {
@@ -901,8 +898,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -918,7 +914,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 18
+            "y": 11
           },
           "id": 14,
           "options": {
@@ -1008,8 +1004,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1025,7 +1020,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 26
+            "y": 19
           },
           "id": 15,
           "options": {
@@ -1126,8 +1121,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1143,7 +1137,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 36
+            "y": 29
           },
           "id": 21,
           "options": {
@@ -1243,8 +1237,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1260,7 +1253,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 46
+            "y": 39
           },
           "id": 11,
           "options": {
@@ -1360,8 +1353,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1405,7 +1397,7 @@
               "textEditor": true
             }
           ],
-          "title": "Tiempo de respuesta del endpoint /metar",
+          "title": "Tiempo de respuesta del endpoint /metar (se usa cache)",
           "type": "timeseries"
         },
         {
@@ -1453,8 +1445,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1498,7 +1489,7 @@
               "textEditor": true
             }
           ],
-          "title": "Tiempo de respuesta del endpoint /metar_no_cache",
+          "title": "Tiempo de respuesta del endpoint /metar_no_cache (no se usa cache)",
           "type": "timeseries"
         },
         {
@@ -1546,8 +1537,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1649,8 +1639,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1754,8 +1743,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1799,7 +1787,7 @@
               "textEditor": true
             }
           ],
-          "title": "Tiempo de respuesta del endpoint /space_news",
+          "title": "Tiempo de respuesta del endpoint /space_news (se usa cache)",
           "type": "timeseries"
         },
         {
@@ -1847,8 +1835,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1892,7 +1879,7 @@
               "textEditor": true
             }
           ],
-          "title": "Tiempo de respuesta del endpoint /space_news_no_cache",
+          "title": "Tiempo de respuesta del endpoint /space_news_no_cache (no se usa cache)",
           "type": "timeseries"
         },
         {
@@ -1940,8 +1927,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2043,8 +2029,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2148,8 +2133,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2239,8 +2223,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2284,7 +2267,7 @@
               "textEditor": true
             }
           ],
-          "title": "Tiempo de respuesta del endpoint /fact",
+          "title": "Tiempo de respuesta del endpoint /fact (se usa cache)",
           "type": "timeseries"
         },
         {
@@ -2332,8 +2315,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2377,7 +2359,7 @@
               "textEditor": true
             }
           ],
-          "title": "Tiempo de respuesta del endpoint /fact_no_cache",
+          "title": "Tiempo de respuesta del endpoint /fact_no_cache (no se usa cache)",
           "type": "timeseries"
         },
         {
@@ -2425,8 +2407,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2597,6 +2578,6 @@
   "timezone": "",
   "title": "Dashboard App",
   "uid": "arxIPammk",
-  "version": 81,
+  "version": 87,
   "weekStart": ""
 }
