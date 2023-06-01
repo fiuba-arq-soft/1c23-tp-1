@@ -69,7 +69,7 @@ Gráficos adicionales obtenidos adicionalmente al dashboard original:
 - Demora de cada endpoint en responder
 - Demora de cada API remota en responder
 
-# Resultados obtenidos.
+# Resultados obtenidos. Caso con Replicación.
 
 ### Ping
 
@@ -122,3 +122,14 @@ En los siguientes gráficos, podemos observar el comportamiento y rendimiento de
 La aplicación en promedio tardo 749 ms en devolverle una respuesta al cliente.
 
 ![](files/metricas_3_juntos.png)
+
+# Resultados obtenidos. Sin Replicación.
+
+## Endpoint /fact y /fact_no_cache
+![](files/sin_replicacion/fact.png)
+## Endpoint /metar y /metar_no_cache
+![](files/sin_replicacion/metar.png)
+## Endpoint /space_news y /space_news_no_cache
+![](files/sin_replicacion/space_news.png)
+
+En los graficos en donde podemos apreciar algunos requests que tardar 0 ms en ser respondidas, es porque el servidor llego al tope limite de requests por segundo y se empieza a devolver un error 429 Too many Requests.
