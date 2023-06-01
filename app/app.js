@@ -5,7 +5,7 @@ import { createClient } from "redis";
 import { XMLParser } from "fast-xml-parser";
 import { decode } from "metar-decoder";
 import { StatsD } from "hot-shots";
-import  rateLimiter from "express-rate-limit";
+import rateLimiter from "express-rate-limit";
 
 const limiter = rateLimiter({
   windowMs: 40 * 1000,
@@ -103,8 +103,8 @@ app.get("/fact", limiter, async (req, res) => {
 async function getMetarData(req, useCache = true) {
   let response_message;
   const code_station = req.query.station;
+  let metar_key = `metar_${code_station ?? "null"}_key`;
   if (useCache) {
-    let metar_key = `metar_${code_station ?? "null"}_key`;
     let metar_string = await redisClient.get(metar_key);
     if (metar_string !== null) {
       return { res: JSON.parse(metar_string), status: 200, error_message: "" };
